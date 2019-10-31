@@ -83,10 +83,10 @@ function handleSubmit(e){
                 setpassError('- Must Match')
                 setconfirmError('- Must Match')
             }
-     }else if(pass !== '' && confirm == ''){
+     }else if(pass !== '' && confirm === ''){
             err = true
             setconfirmError("- Password's must match ")
-    }else if(pass == '' && confirm !== ''){
+    }else if(pass === '' && confirm !== ''){
         err = true
         setpassError("- Password's must match") 
     }else {
