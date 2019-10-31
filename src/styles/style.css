@@ -49,7 +49,6 @@ button{
     color: red;
 }
 .error{
-    color: red;
     border: red 2px solid;
 }
 .labelerror{
@@ -62,6 +61,7 @@ button{
     margin:0;
     color: white;
     text-align: center;
+    height: 1000px;
 }
 h3{
     font-size: 50px;

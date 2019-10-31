@@ -1,27 +1,36 @@
 import React, { useState } from 'react'
 import validator from 'validator'
-import Submit from './Complete'
 
 function Fill(props){
+/////// HOOKS ///////
+
+// NAME
 const [fname, setFname] = useState('')
 const [fnameError, setfnameError] = useState('')
+// EMAIL
 const [email, setEmail] = useState('')
 const [emailError, setemailError] = useState('')
+// USERNAME
 const [user, setUser] = useState('')
 const [userError, setuserError] = useState('')
+// PASSWORD
 const [pass, setPass] = useState('')
 const [passError, setpassError] = useState('')
+// CONFIRM
 const [confirm,setConfirm] = useState('')
 const [confirmError, setconfirmError] = useState('') 
+// WEBSITE
 const [web, setWeb] = useState('')
 const [webError, setwebError] = useState('')
 
+
+// Submit event handler
 function handleSubmit(e){
     e.preventDefault()
     let err = false
-    // NAME
+    // NAME //////////////
     if(fname !== ''){
-        if(!validator.isAlpha(fname)){
+        if(!validator.isAlphanumeric(fname)){
             err = true
             setfnameError('- Must be a valid Name')
         }else{
@@ -31,7 +40,8 @@ function handleSubmit(e){
         err = true
         setfnameError('- Cannot be blank')
     }
-    // EMAIL
+
+    // EMAIL /////////////
     if (email !== ''){
         if(!validator.isEmail(email)){
             err = true
@@ -43,7 +53,7 @@ function handleSubmit(e){
         err = true
         setemailError('- Cannot be blank')
     }
-    // USERNAME
+    // USERNAME ////////////
     if (user !== ''){
         if(!validator.isAlphanumeric(user)){
             err = true
@@ -55,7 +65,8 @@ function handleSubmit(e){
         err = true
         setuserError('- Cannot be blank')
     }
-    // PASSWORD 
+
+    // PASSWORD /////////////
     if(pass !== '' && confirm !== '' ){
         if(!validator.isAscii(pass)){
             err = true
@@ -74,17 +85,17 @@ function handleSubmit(e){
             }
      }else if(pass !== '' && confirm == ''){
             err = true
-            setconfirmError('- Cannot be blank')
+            setconfirmError("- Password's must match ")
     }else if(pass == '' && confirm !== ''){
         err = true
-        setpassError('- Cannot be blank') 
+        setpassError("- Password's must match") 
     }else {
         err = true 
         setpassError('- Cannot be blank')
         setconfirmError('- Cannot be blank')
    }
     
-    // WEBSITE
+    // WEBSITE //////////////
     if(web !== ''){
         if(!validator.isURL(web)){
             err = true
@@ -108,6 +119,8 @@ function handleSubmit(e){
         <div id="body">
             <form id="form" onSubmit={handleSubmit}>
             <h1>Profile Form - All fields required</h1>
+
+            {/* NAME */}
             <label className={fnameError === '' ? '': 'labelerror'} htmlFor="name">Name {fnameError}</label>
             <input type="text" 
             id="name" 
@@ -117,7 +130,8 @@ function handleSubmit(e){
             onChange = {e => setFname(e.target.value)}>
             </input>
 
-            <label className={fnameError === '' ? '': 'labelerror'} htmlFor="email">Email { emailError}</label>
+            {/* EMAIL */}
+            <label className={emailError === '' ? '': 'labelerror'} htmlFor="email">Email { emailError}</label>
             <input 
             type="email" 
             className={emailError === '' ? '': 'error'}
@@ -126,8 +140,9 @@ function handleSubmit(e){
             id="email"
             onChange = {e => setEmail(e.target.value)}>
             </input> 
-             
-            <label className={fnameError === '' ? '': 'labelerror'} htmlFor="user">Username {  userError}</label>
+
+             {/*USERNAME  */}
+            <label className={userError === '' ? '': 'labelerror'} htmlFor="user">Username {  userError}</label>
             <input 
             type="text" 
             placeholder="Username"
@@ -136,8 +151,9 @@ function handleSubmit(e){
             value={user} 
             onChange = {e => setUser(e.target.value)}>
             </input>
-           
-            <label className={fnameError === '' ? '': 'labelerror'} htmlFor="pass">Password {  passError}</label>
+
+            {/* PASSWORD */}
+            <label className={passError === '' ? '': 'labelerror'} htmlFor="pass">Password {  passError}</label>
             <input
              type="password" 
              id="pass" 
@@ -147,7 +163,8 @@ function handleSubmit(e){
              onChange = {e => setPass(e.target.value)}>
              </input>
            
-            <label className={fnameError === '' ? '': 'labelerror'} htmlFor="confirm">Confirm Password { confirmError}</label>
+            {/* CONFIRM PASSWORD */}
+            <label className={confirmError === '' ? '': 'labelerror'} htmlFor="confirm">Confirm Password { confirmError}</label>
             <input 
             type="password" 
             id="confirm" 
@@ -156,10 +173,11 @@ function handleSubmit(e){
             value={confirm}
              onChange = {e => setConfirm(e.target.value)}>
              </input>
-           
-            <label className={fnameError === '' ? '': 'labelerror'}  htmlFor="web">Website {webError}</label>
+
+            {/* WEBSITE */}
+            <label className={webError === '' ? '': 'labelerror'}  htmlFor="web">Website {webError}</label>
             <input
-            type="url" 
+            type="text" 
             id="web" 
             placeholder = "Url"
             className = {webError === '' ? '' : 'error'}
@@ -168,6 +186,7 @@ function handleSubmit(e){
             onChange = {e => setWeb(e.target.value)}>
             </input>
 
+            {/* BUTTON */}
              <button type="submit">Submit</button>
             </form>
         </div>
